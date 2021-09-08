@@ -239,4 +239,8 @@ public class StoriesProgressView extends LinearLayout {
         if (current < 0) return;
         progressBars.get(current).resumeProgress();
     }
+    
+    public void setIsComplete(boolean isComplete) {
+        this.isComplete = isComplete;
+    }
 }
