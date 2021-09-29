@@ -28,7 +28,6 @@ public class StoriesProgressView extends LinearLayout {
      */
     private int current = -1;
     private StoriesListener storiesListener;
-    boolean isComplete;
 
     private boolean isSkipStart;
     private boolean isReverseStart;
@@ -119,7 +118,6 @@ public class StoriesProgressView extends LinearLayout {
      */
     public void skip() {
         if (isSkipStart || isReverseStart) return;
-        if (isComplete) return;
         if (current < 0) return;
         PausableProgressBar p = progressBars.get(current);
         isSkipStart = true;
@@ -131,7 +129,6 @@ public class StoriesProgressView extends LinearLayout {
      */
     public void reverse() {
         if (isSkipStart || isReverseStart) return;
-        if (isComplete) return;
         if (current < 0) return;
         PausableProgressBar p = progressBars.get(current);
         isReverseStart = true;
@@ -174,7 +171,6 @@ public class StoriesProgressView extends LinearLayout {
             @Override
             public void onFinishProgress() {
                 if (isReverseStart) {
-                    if (storiesListener != null) storiesListener.onPrev();
                     if (0 <= (current - 1)) {
                         PausableProgressBar p = progressBars.get(current - 1);
                         p.setMinWithoutCallback();
@@ -182,15 +178,16 @@ public class StoriesProgressView extends LinearLayout {
                     } else {
                         progressBars.get(current).startProgress();
                     }
+                    if (storiesListener != null) storiesListener.onPrev();
                     isReverseStart = false;
                     return;
                 }
                 int next = current + 1;
                 if (next <= (progressBars.size() - 1)) {
-                    if (storiesListener != null) storiesListener.onNext();
                     progressBars.get(next).startProgress();
+                    if (storiesListener != null) storiesListener.onNext();
+
                 } else {
-                    isComplete = true;
                     if (storiesListener != null) storiesListener.onComplete();
                 }
                 isSkipStart = false;
@@ -238,9 +235,5 @@ public class StoriesProgressView extends LinearLayout {
     public void resume() {
         if (current < 0) return;
         progressBars.get(current).resumeProgress();
-    }
-    
-    public void setIsComplete(boolean isComplete) {
-        this.isComplete = isComplete;
     }
 }
