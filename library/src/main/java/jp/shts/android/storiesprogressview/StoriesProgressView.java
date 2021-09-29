@@ -184,7 +184,7 @@ public class StoriesProgressView extends LinearLayout {
                 }
                 int next = current + 1;
                 if (next <= (progressBars.size() - 1)) {
-                    progressBars.get(next).startProgress();
+                    // progressBars.get(next).startProgress();
                     if (storiesListener != null) storiesListener.onNext();
                 } else {
                     if (storiesListener != null) storiesListener.onComplete();
