@@ -224,7 +224,7 @@ public class StoriesProgressView extends LinearLayout {
         }
     }
 
-    public Int getSize() {
+    public int getSize() {
         return progressBars.size();
     }
 
