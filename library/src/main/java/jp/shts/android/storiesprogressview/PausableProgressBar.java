@@ -72,6 +72,14 @@ final class PausableProgressBar extends FrameLayout {
             animation.cancel();
         }
     }
+    
+    void clearProgress() {
+        maxProgressView.setVisibility(INVISIBLE);
+        if (animation != null) {
+            animation.setAnimationListener(null);
+            animation.cancel();
+        }
+    }
 
     void setMaxWithoutCallback() {
         maxProgressView.setBackgroundResource(R.color.progress_max_active);
