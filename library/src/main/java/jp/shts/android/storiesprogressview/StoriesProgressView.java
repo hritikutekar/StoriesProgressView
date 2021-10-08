@@ -221,7 +221,6 @@ public class StoriesProgressView extends LinearLayout {
      */
     public void destroy() {
         for (PausableProgressBar p : progressBars) {
-            p.setMin();
             p.clear();
         }
     }
